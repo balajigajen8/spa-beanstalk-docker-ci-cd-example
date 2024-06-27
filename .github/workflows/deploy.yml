@@ -27,6 +27,7 @@ jobs:
 
       # run our app's build command
       - name: Run ng build
+        working-directory: ./spa-beanstalk-docker-ci-cd-example/
         run: npm run build -- --prod --optimization=false
 
       # package our entire project folder except for node_modules (they are bundled so we can skip them)
