@@ -4,7 +4,7 @@ on:
   push:
     # List all the branches you want to trigger this CI workflow
     branches:
-      - development
+      - master
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
         uses: rlespinasse/github-slug-action@v3.x
 
       # if we are on "development" branch, we will deploy to our development environment. You can add as many of these "if" blocks as needed for different branches.
-      - if: env.GITHUB_REF_SLUG == 'development'
+      - if: env.GITHUB_REF_SLUG == 'master'
         name: Deploy to development
         uses: einaregilsson/beanstalk-deploy@v14
         with:
@@ -53,10 +53,10 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           # todo: replace
-          application_name: "[ENTER YOUR APPLICATION NAME HERE]"
+          application_name: "[testing-angular]"
           # todo: replace
-          environment_name: "[ENTER YOUR ENVIRONMENT NAME HERE]"
+          environment_name: "[testing-angular-env ]"
           version_label: ${{ steps.generate-uuid.outputs.uuid }}
           # todo: replace
-          region: "[ENTER YOUR REGION HERE]"
+          region: "[us-east-1]"
           deployment_package: deploy.zip
